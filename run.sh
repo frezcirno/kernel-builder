@@ -23,7 +23,9 @@ for f in $PATCHDIR/*; do
 	patch -p1 -N -d $SOURCE < $f || true
 done
 
-sudo cp $SRCDIR/.config $SOURCE/.config
+if [ ! -f $SOURCE/.config ]; then
+	cp $SRCDIR/.config $SOURCE/.config
+fi
 
 docker run --rm -v $SRCDIR:/src kernel-builder:latest \
 	make V=1 -C /src/linux-$VERSION -j$(nproc) bindeb-pkg
