@@ -1,0 +1,12 @@
+diff --git a/scripts/package/mkdebian b/scripts/package/mkdebian
+index 60a2a63a5e90..adf04dd7df25 100755
+--- a/scripts/package/mkdebian
++++ b/scripts/package/mkdebian
+@@ -175,7 +175,6 @@ Section: kernel
+ Priority: optional
+ Maintainer: $maintainer
+ Rules-Requires-Root: no
+-Build-Depends: bc, rsync, kmod, cpio, bison, flex | flex:native $extra_build_depends
+ Homepage: https://www.kernel.org/
+
+ Package: $packagename-$version

@@ -1,0 +1,18 @@
+diff --git a/Makefile b/Makefile
+index 1fc3491096cb..c593eb4c51fa 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1327,11 +1327,11 @@ endif
+
+ tools/: FORCE
+ 	$(Q)mkdir -p $(objtree)/tools
+-	$(Q)$(MAKE) LDFLAGS= MAKEFLAGS="$(tools_silent) $(filter --j% -j,$(MAKEFLAGS))" O=$(abspath $(objtree)) subdir=tools -C $(srctree)/tools/
++	$(Q)$(MAKE) MAKEFLAGS="$(tools_silent) $(filter --j% -j,$(MAKEFLAGS))" O=$(abspath $(objtree)) subdir=tools -C $(srctree)/tools/
+
+ tools/%: FORCE
+ 	$(Q)mkdir -p $(objtree)/tools
+-	$(Q)$(MAKE) LDFLAGS= MAKEFLAGS="$(tools_silent) $(filter --j% -j,$(MAKEFLAGS))" O=$(abspath $(objtree)) subdir=tools -C $(srctree)/tools/ $*
++	$(Q)$(MAKE) MAKEFLAGS="$(tools_silent) $(filter --j% -j,$(MAKEFLAGS))" O=$(abspath $(objtree)) subdir=tools -C $(srctree)/tools/ $*
+
+ # ---------------------------------------------------------------------------
+ # Kernel selftest
