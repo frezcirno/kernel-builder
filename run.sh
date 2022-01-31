@@ -4,7 +4,6 @@ set -e
 BASE=$(realpath $(dirname $0))
 SRCDIR=$BASE/src
 PATCHDIR=$BASE/patches
-CONFIG=$BASE/.config
 
 if [ $# != 1 ]; then
 	echo "usage: $0 <kernel_version>"
@@ -24,7 +23,7 @@ for f in $PATCHDIR/*; do
 	patch -p1 -N -d $SOURCE < $f || true
 done
 
-sudo cp $CONFIG $SOURCE/.config
+sudo cp $SRCDIR/.config $SOURCE/.config
 
 docker run --rm -v $SRCDIR:/src kernel-builder:latest \
 	make V=1 -C /src/linux-$VERSION -j$(nproc) bindeb-pkg
