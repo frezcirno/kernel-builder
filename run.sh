@@ -28,4 +28,4 @@ if [ ! -f $SOURCE/.config ]; then
 fi
 
 docker run --rm -v $SRCDIR:/src kernel-builder:latest \
-	make V=1 -C /src/linux-$VERSION -j$(nproc) bindeb-pkg
+	make V=1 -C /src/linux-$VERSION -j$(nproc) deb-pkg
