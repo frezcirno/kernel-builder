@@ -61,7 +61,7 @@ if [ ! -f $SOURCE/.config ]; then
 fi
 
 if [ -z $DEBUG ]; then
-    docker run --rm -v $SRCDIR:/src kernel-builder:latest make -C /src/linux-$VERSION -j${NPROC:-$(nproc)} deb-pkg |& tee build.log
+    docker run --rm -v $SRCDIR:/src kernel-builder:latest make -C /src/linux-$VERSION -j${NPROC:-$(nproc)} bindeb-pkg |& tee build.log
 else
     docker run --rm -it -v $SRCDIR:/src kernel-builder:latest bash
 fi
