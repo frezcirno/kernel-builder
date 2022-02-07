@@ -48,16 +48,17 @@ if [ ! -d $SOURCE ]; then
     wget -qO- $SOURCE_URL | tar -C $SRCDIR -Jxvf -
 fi
 
+if [ -z $DEBUG ]; then
+    docker run --rm -v $SRCDIR:/src kernel-builder:latest make -C /src/linux-$VERSION mrproper
+fi
+
 for f in $PATCHDIR/*; do
     patch -p1 -N -d $SOURCE < $f || true
 done
 
 if [ ! -f $SOURCE/.config ]; then
-    cp $SRCDIR/.config $SOURCE/.config
+    cp $SRCDIR/config-$VERSION $SOURCE/.config
 fi
-
-rm $SOURCE/vmlinux-gdb.py || true
-rm -rf $SOURCE/debian || true
 
 if [ -z $DEBUG ]; then
     docker run --rm -v $SRCDIR:/src kernel-builder:latest make -C /src/linux-$VERSION -j${NPROC:-$(nproc)} deb-pkg |& tee build.log

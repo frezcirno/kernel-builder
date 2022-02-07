@@ -1,5 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:bullseye-slim
 
-RUN apt update && apt install -y ca-certificates apt-transport-https \
-        && sed -i "s|http://deb.debian.org/debian|https://mirror.sjtu.edu.cn/debian|g" /etc/apt/sources.list \
-        && apt update && apt install -y bc gcc flex bison make zstd cpio pahole rsync libncurses-dev openssl libssl-dev dpkg-dev libelf-dev python3 zlib1g-dev
+RUN sed -i "s|http://deb.debian.org/debian|http://mirror.sjtu.edu.cn/debian|g" /etc/apt/sources.list \
+        && apt update && apt install -y bc gcc flex bison make zstd cpio kmod dwarves rsync libncurses-dev openssl libssl-dev dpkg-dev libelf-dev python3 zlib1g-dev
